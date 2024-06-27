@@ -1,0 +1,17 @@
+{
+    "name": "dothnews/front-reader",
+    "description": "Consume the laranews api",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Dothnews\\FrontReader\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Gabriel Novaes",
+            "email": "semproblema@gmail.com"
+        }
+    ],
+    "require": {}
+}
