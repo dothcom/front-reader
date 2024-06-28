@@ -13,5 +13,14 @@
             "email": "semproblema@gmail.com"
         }
     ],
-    "require": {}
+    "extra" : {
+        "laravel": {
+            "providers": [
+                "Dothnews\\FrontReader\\FrontReaderServiceProvider"
+            ]
+        }
+    },
+    "require": {
+        "php": "^8.2"
+    }
 }
