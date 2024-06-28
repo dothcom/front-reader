@@ -9,12 +9,12 @@ use GuzzleHttp\Client;
 class IndexController extends Controller
 {
 
-    protected $client;
+    // protected $client;
 
-    public function __construct(Client $client)
-    {
-        $this->client = $client;
-    }
+    // public function __construct(Client $client)
+    // {
+    //     $this->client = $client;
+    // }
 
     public function index()
     {
@@ -26,7 +26,7 @@ class IndexController extends Controller
         $apiUrl = config('front-reader.api_url');
         $apiKey = config('front-reader.api_key');
 
-        dd($apiUrl, $apiKey);
+       // dd($apiUrl, $apiKey);
 
 
 
