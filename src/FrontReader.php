@@ -4,8 +4,8 @@ namespace Dothnews\FrontReader;
 
 class FrontReader
 {
-    public function hi(String $sName)
+    public function hi(string $sName)
     {
-        return 'Hi ' . $sName . '! How are you doing today?';
+        return 'Hi '.$sName.'! How are you doing today?';
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use DothNews\FrontReader\Http\Controllers\IndexController;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', [IndexController::class, 'index']);

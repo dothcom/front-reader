@@ -2,13 +2,11 @@
 
 namespace DothNews\FrontReader\Http\Controllers;
 
-use Illuminate\Routing\Controller;
 use GuzzleHttp\Client;
-
+use Illuminate\Routing\Controller;
 
 class IndexController extends Controller
 {
-
     // protected $client;
 
     // public function __construct(Client $client)
@@ -21,14 +19,12 @@ class IndexController extends Controller
         //$response = $this->client->get("https://6d7d0164796742fcb625a3fc36f32ae2.api.mockbin.io/");
         //$news = json_decode($response->getBody(), true);
 
-        
-// open front-reader config
-        $apiUrl = config('front-reader.api_url');
-        $apiKey = config('front-reader.api_key');
+        // open front-reader config
 
-       // dd($apiUrl, $apiKey);
+        // $apiUrl = config('front-reader.api_url');
+        // $apiKey = config('front-reader.api_key');
 
-
+        // dd($apiUrl, $apiKey);
 
         //return response()->json($news);
         return view('index');

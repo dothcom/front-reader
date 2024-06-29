@@ -7,28 +7,13 @@ This is a package that provides functionality for reading api data from laranews
 To install this package, you can use Composer. Run the following command in your terminal:
 
 ```bash
-composer require my-package
+composer require dothnews/front-reader
 ```
 
-## Usage
+## Configuration
 
-After installing the package, you need to register the package service provider in the Laravel application's `AppServiceProvider.php` file. Add the following code to the `boot` method:
+To publish the configuration file, run the following command in your terminal:
 
-```php
-/**
- * Bootstrap any application services.
- */
-public function boot(): void
-{
-    $this->app->register(FrontReader\FrontReaderServiceProvider::class);
-}
+```bash
+sail a vendor:publish --tag=front-reader-config
 ```
-
-That's it! You can now start using the functionality provided by this package in your Laravel application.
-
-## License
-
-This package is open-source software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-
-
-
