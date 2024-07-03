@@ -22,5 +22,13 @@
     },
     "require": {
         "php": "^8.2"
+    },
+    "require-dev": {
+        "laravel/pint": "^0.1.2"
+    },
+    "scripts": {
+        "format": [
+            "./vendor/bin/pint"
+        ]
     }
 }

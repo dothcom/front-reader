@@ -26,7 +26,5 @@ class FrontReaderServiceProvider extends ServiceProvider
         // $this->app->singleton(MenuService::class, function ($app) {
         //     return new MenuService();
         // });
-
-
     }
 }

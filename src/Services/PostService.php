@@ -8,15 +8,15 @@ class PostService
     {
         // Implementação do serviço
         $allNews = [
-            ['title' => 'Notícia de teste 1 com titulo grande', 'date' => '2019-01-01' , 'editoria' => 'política' , 
+            ['title' => 'Notícia de teste 1 com titulo grande', 'date' => '2019-01-01' , 'editoria' => 'política' ,
                 'url' => 'http://example.com/noticia-1' , 'image' => 'https://via.placeholder.com/300x250'],
-            
+
             ['title' => 'Coritiba vence o criciuma', 'date' => '2019-01-02' , 'editoria' => 'esporte' ,
                 'url' => 'http://example.com/noticia-2' , 'image' => 'https://via.placeholder.com/300x250'],
 
             ['title' => 'Prefeito corre', 'date' => '2019-01-02' , 'editoria' => 'esporte' ,
                 'url' => 'http://example.com/noticia-2' , 'image' => 'https://via.placeholder.com/300x250'],
-            
+
         ];
 
         // return with limit
