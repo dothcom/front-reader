@@ -3,6 +3,8 @@
 namespace DothNews\FrontReader;
 
 use Illuminate\Support\ServiceProvider;
+use DothNews\FrontReader\Services\PostService;
+use DothNews\FrontReader\Services\MenuService;
 
 class FrontReaderServiceProvider extends ServiceProvider
 {
@@ -15,5 +17,16 @@ class FrontReaderServiceProvider extends ServiceProvider
         ], 'front-reader-config');
     }
 
-    public function register() {}
+    public function register()
+    {
+        // $this->app->singleton(PostService::class, function ($app) {
+        //     return new PostService();
+        // });
+
+        // $this->app->singleton(MenuService::class, function ($app) {
+        //     return new MenuService();
+        // });
+
+
+    }
 }
