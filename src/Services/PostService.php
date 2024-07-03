@@ -2,24 +2,20 @@
 
 namespace Dothnews\FrontReader\Services;
 
+use Illuminate\Support\Facades\Http;
+
 class PostService
 {
     public function getLatestNews(int $limit = 10)
     {
-        // Implementação do serviço
-        $allNews = [
-            ['title' => 'Notícia de teste 1 com titulo grande', 'date' => '2019-01-01' , 'editoria' => 'política' ,
-                'url' => 'http://example.com/noticia-1' , 'image' => 'https://via.placeholder.com/300x250'],
+        $response = Http::accept('application/json')
+                        ->withToken(config('front-reader.api_key'))
+                        ->get(config('front-reader.api_url').'/api/posts/?per_page='.$limit);
 
-            ['title' => 'Coritiba vence o criciuma', 'date' => '2019-01-02' , 'editoria' => 'esporte' ,
-                'url' => 'http://example.com/noticia-2' , 'image' => 'https://via.placeholder.com/300x250'],
+        if ($response->status() == 404) {
+            throw new \Exception('Posts not found');
+        }
 
-            ['title' => 'Prefeito corre', 'date' => '2019-01-02' , 'editoria' => 'esporte' ,
-                'url' => 'http://example.com/noticia-2' , 'image' => 'https://via.placeholder.com/300x250'],
-
-        ];
-
-        // return with limit
-        return array_slice($allNews, 0, $limit);
+        return $response->object() ;
     }
 }
