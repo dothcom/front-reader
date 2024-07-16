@@ -10,4 +10,11 @@ class PostService extends BaseService
         $options = ['status' => 'published', 'per_page' => $limit];
         return $this->makeRequest($url, $options);
     }
+
+    public function getPostBySlug(string $slug)
+    {
+        $url = config('front-reader.api_url').'/posts/slug/'.$slug;
+
+        return $this->makeRequest($url);
+    }
 }

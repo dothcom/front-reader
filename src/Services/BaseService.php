@@ -3,6 +3,7 @@
 namespace Dothnews\FrontReader\Services;
 
 use Illuminate\Support\Facades\Http;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Exception;
 
 class BaseService
@@ -24,7 +25,7 @@ class BaseService
             case 401:
                 throw new Exception('Unauthorized API Key');
             case 404:
-                throw new Exception('Resource not found');
+                throw new NotFoundHttpException('Resource not found');
             case 500:
                 throw new Exception('Internal Server Error');
             // Você pode adicionar mais códigos de status conforme necessário
