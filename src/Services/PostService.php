@@ -2,20 +2,12 @@
 
 namespace Dothnews\FrontReader\Services;
 
-use Illuminate\Support\Facades\Http;
-
-class PostService
+class PostService extends BaseService
 {
     public function getLatestNews(int $limit = 10)
     {
-        $response = Http::accept('application/json')
-                        ->withToken(config('front-reader.api_key'))
-                        ->get(config('front-reader.api_url').'/api/posts/?per_page='.$limit);
-
-        if ($response->status() == 404) {
-            throw new \Exception('Posts not found');
-        }
-
-        return $response->object() ;
+        $url = config('front-reader.api_url').'/posts/';
+        $options = ['status' => 'published', 'per_page' => $limit];
+        return $this->makeRequest($url, $options);
     }
 }

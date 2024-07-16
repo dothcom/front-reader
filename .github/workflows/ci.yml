@@ -29,23 +29,4 @@ jobs:
       run: |
         ./vendor/bin/pint --test
 
-    # - name: Directory Permissions
-    #   run: chmod -R 777 storage bootstrap/cache
-
-    # - name: Seed database
-    #   run: php artisan migrate:fresh --seed
-
-    # - name: Run Larastan (Static Analysis)
-    #   run: php ./vendor/bin/phpstan analyse
-
-    # - name: Run Pint (Like PHP Insights)
-    #   run: php ./vendor/bin/pint
-
-    # - name: Execute tests (Unit and Feature tests) via PestPHP
-    #   run: |
-    #     APP_ENV=ci php ./vendor/bin/pest --parallel --coverage --min=80%
-
-    # - name: Generate documentation with scribe
-    #   run: php artisan scribe:generate
-
   
