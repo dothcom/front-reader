@@ -1,6 +1,6 @@
 {
     "name": "dothnews/front-reader",
-    "description": "Consume the laranews api",
+    "description": "Library laravel to Consume the laranews api",
     "type": "library",
     "autoload": {
         "psr-4": {
