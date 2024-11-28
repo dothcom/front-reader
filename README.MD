@@ -1,6 +1,6 @@
 # Front Reader for dothNews
 
-This is a package that provides functionality for reading api data from dothNews API.
+This is a package that provides functionality for reading api data from dothNews API v6.
 
 ## Installation
 
