@@ -2,7 +2,6 @@
 
 namespace DothNews\FrontReader\Http\Controllers\Category;
 
-use GuzzleHttp\Client;
 use Illuminate\Routing\Controller;
 
 class IndexCategoryController extends Controller

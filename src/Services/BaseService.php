@@ -37,9 +37,9 @@ class BaseService
 
     protected function paginateResponse($response)
     {
-        if (!is_object($response) || 
-            !property_exists($response, 'data') || 
-            !property_exists($response, 'meta') || 
+        if (!is_object($response) ||
+            !property_exists($response, 'data') ||
+            !property_exists($response, 'meta') ||
             !is_object($response->meta)) {
             throw new InvalidArgumentException('The response format is invalid.');
         }
