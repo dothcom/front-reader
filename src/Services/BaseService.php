@@ -14,7 +14,7 @@ class BaseService
     protected function makeRequest(string $url, array $options = [])
     {
         $response = Http::accept('application/json')
-                        //->withToken(config('front-reader.api_key'))
+                        ->withToken(config('front-reader.api_key'))
                         ->get($url, $options);
 
         $this->handleCommonExceptions($response);

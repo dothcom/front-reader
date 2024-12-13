@@ -3,6 +3,7 @@
 namespace DothNews\FrontReader;
 
 use Illuminate\Support\ServiceProvider;
+use DothNews\FrontReader\Services\CategorytService;
 use DothNews\FrontReader\Services\PostService;
 use DothNews\FrontReader\Services\MenuService;
 
