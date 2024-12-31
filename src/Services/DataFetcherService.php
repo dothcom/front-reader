@@ -5,7 +5,7 @@ namespace Dothnews\FrontReader\Services;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 
-class JsonService extends BaseService
+class DataFetcherService extends BaseService
 {
     public function download(string $url, string $filename, float $hours = 1): array
     {
@@ -18,7 +18,7 @@ class JsonService extends BaseService
 
             return $this->fetchAndCacheJson($url, $path);
         } catch (\Exception $e) {
-            throw new \Exception('Erro ao processar a URL: '.$e->getMessage());
+            throw new \Exception('Error processing URL: '.$e->getMessage());
         }
     }
 
@@ -46,7 +46,7 @@ class JsonService extends BaseService
         $decodedJson = json_decode($cachedContent, true);
 
         if (json_last_error() !== JSON_ERROR_NONE) {
-            throw new \Exception('Erro ao decodificar JSON em cache: '.json_last_error_msg());
+            throw new \Exception('JSON Error: '.json_last_error_msg());
         }
 
         return $decodedJson;
@@ -60,7 +60,7 @@ class JsonService extends BaseService
         $response = Http::get($url);
 
         if ($response->failed()) {
-            throw new \Exception("Erro ao baixar JSON da URL: $url");
+            throw new \Exception("Error downloading JSON from URL: $url");
         }
 
         $jsonContent = $response->body();
@@ -69,7 +69,7 @@ class JsonService extends BaseService
         $decodedJson = json_decode($jsonContent, true);
 
         if (json_last_error() !== JSON_ERROR_NONE) {
-            throw new \Exception('Erro ao decodificar JSON: '.json_last_error_msg());
+            throw new \Exception('JSON Error: '.json_last_error_msg());
         }
 
         return $decodedJson;

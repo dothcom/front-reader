@@ -4,7 +4,7 @@ namespace Dothnews\FrontReader\Services;
 
 use Illuminate\Support\Collection;
 
-class MostReadService extends JsonService
+class MostReadService extends DataFetcherService
 {
     public function getMostRead(array $options = [])
     {

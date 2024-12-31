@@ -4,7 +4,7 @@ namespace Dothnews\FrontReader\Services;
 
 use Illuminate\Support\Str;
 
-class WeatherService extends JsonService
+class WeatherService extends DataFetcherService
 {
     public function getWeather($cidade, $ttl = 2)
     {
