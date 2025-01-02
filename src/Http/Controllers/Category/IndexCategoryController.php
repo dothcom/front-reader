@@ -6,14 +6,9 @@ use Illuminate\Routing\Controller;
 
 class IndexCategoryController extends Controller
 {
-    public function index($slug='ultimas-noticias')
+    public function index($slug = 'ultimas-noticias')
     {
-        $data = [
-            'slug' => $slug,
-            'editoria' => 'ultimas-noticias'
-        ];
-
-        return view('category.index', $data);
+        return view('category.index', [ 'slug' => $slug ]);
     }
 
     public function listByCategory($slug)

@@ -24,8 +24,6 @@ class IndexPostController extends Controller
         // $apiUrl = config('front-reader.api_url');
         // $apiKey = config('front-reader.api_key');
 
-
-
         //return response()->json($news);
         return view('post.index');
     }
