@@ -2,9 +2,9 @@
 
 namespace DothNews\FrontReader\Http\Controllers\Post;
 
-use Illuminate\Routing\Controller;
+use DothNews\FrontReader\Http\Controllers\BaseController;
 
-class DetailPostController extends Controller
+class DetailPostController extends BaseController
 {
     public function index()
     {
