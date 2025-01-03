@@ -26,5 +26,14 @@ class FrontReaderServiceProvider extends ServiceProvider
         // $this->app->singleton(MenuService::class, function ($app) {
         //     return new MenuService();
         // });
+        $this->loadHelpers();
+    }
+
+    protected function loadHelpers()
+    {
+        $helpers = __DIR__.'/helpers.php';
+        if (file_exists($helpers)) {
+            require_once $helpers;
+        }
     }
 }
