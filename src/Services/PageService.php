@@ -23,8 +23,12 @@ class PageService extends BaseService
             $template = 'page.html';
         } elseif ($page_type == 'news') {
             $template = 'category.index';
-        } elseif (View::exists($page_type)) {
-            $template = $page_type;
+        } elseif (str_starts_with($page_type, 'news-') || str_starts_with($page_type, 'page-')) {
+            $tpl = str_replace(['news-', 'page-'], ['news.', 'page.'], $page_type);
+
+            if (View::exists($tpl)) {
+                $template = $tpl;
+            }
         }
 
         return $template;

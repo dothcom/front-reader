@@ -10,29 +10,23 @@ class IndexPageController extends BaseController
 {
     public function index($slug = 'ultimas-noticias')
     {
-        $pageService = new PageService();
-        $page = $pageService->getPage($slug);
+        $page = $this->getPageData($slug);
 
         if (! isset($page->data->id)) {
             abort(404);
         }
 
-        $tpl = $pageService->templateByType($page->data->page_type);
+        $template = $this->resolveTemplate($page->data->page_type);
 
-        if ($tpl === 'page.html') {
+        if ($template === 'page.html') {
             return $this->outputContent($page->data->link, $page->data->content);
         }
 
-        if (! View::exists($tpl)) {
+        if (! View::exists($template)) {
             abort(404);
         }
 
-        $data = [
-            'slug' => $slug,
-            'page' => $page->data,
-        ];
-
-        return view($tpl, $data);
+        return $this->renderTemplate($template, $slug, $page->data);
     }
 
     public function listByPage($slug)
@@ -40,18 +34,44 @@ class IndexPageController extends BaseController
         return $this->index($slug);
     }
 
+    private function getPageData(string $slug)
+    {
+        $pageService = new PageService();
+
+        return $pageService->getPage($slug);
+    }
+
+    private function resolveTemplate(string $pageType): string
+    {
+        $pageService = new PageService();
+
+        return $pageService->templateByType($pageType);
+    }
+
+    private function renderTemplate(string $template, string $slug, $pageData)
+    {
+        $data = [
+            'slug' => $slug,
+            'page' => $pageData,
+        ];
+
+        return view($template, $data);
+    }
+
     private function outputContent(string $link, string $content = '')
     {
-        $content_type = 'text/html';
+        $contentType = $this->resolveContentType($link);
 
-        if (substr($link, -4) === '.txt') {
-            $content_type = 'text/plain';
-        } elseif (substr($link, -3) === '.js') {
-            $content_type = 'application/javascript';
-        } elseif (substr($link, -5) === '.json') {
-            $content_type = 'application/json';
-        }
+        return response($content, 200)->header('Content-Type', $contentType);
+    }
 
-        return response($content, 200)->header('Content-Type', $content_type);
+    private function resolveContentType(string $link): string
+    {
+        return match (pathinfo($link, PATHINFO_EXTENSION)) {
+            'txt' => 'text/plain',
+            'js' => 'application/javascript',
+            'json' => 'application/json',
+            default => 'text/html',
+        };
     }
 }
