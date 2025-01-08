@@ -15,5 +15,5 @@ composer require dothnews/front-reader
 To publish the configuration file, run the following command in your terminal:
 
 ```bash
-sail a vendor:publish --tag=front-reader-config
+sail artisan vendor:publish --tag=front-reader-config
 ```
