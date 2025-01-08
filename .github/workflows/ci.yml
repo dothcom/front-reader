@@ -25,8 +25,8 @@ jobs:
     - name: Install Dependencies
       run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
 
-    - name: Pint
+    - name: Pint Test
       run: |
-        ./vendor/bin/pint --test
+        composer ci
 
   
