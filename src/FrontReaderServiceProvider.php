@@ -22,17 +22,10 @@ class FrontReaderServiceProvider extends ServiceProvider
 
     public function register()
     {
-        // $this->app->singleton(PostService::class, function ($app) {
-        //     return new PostService();
-        // });
-
-        // $this->app->singleton(MenuService::class, function ($app) {
-        //     return new MenuService();
-        // });
         $this->loadHelpers();
     }
 
-    protected function loadHelpers()
+    private function loadHelpers()
     {
         $helpers = __DIR__.'/helpers.php';
         if (file_exists($helpers)) {
