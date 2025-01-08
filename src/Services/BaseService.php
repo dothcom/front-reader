@@ -27,11 +27,12 @@ class BaseService
         switch ($response->status()) {
             case 401:
                 throw new Exception('Unauthorized API Key');
+            case 403:
+                throw new Exception('Forbidden - Maybe Unauthorized API Key');
             case 404:
                 throw new NotFoundHttpException('Resource not found');
             case 500:
                 throw new Exception('Internal Server Error');
-                // Você pode adicionar mais códigos de status conforme necessário
         }
     }
 
