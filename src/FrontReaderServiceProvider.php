@@ -2,8 +2,6 @@
 
 namespace DothNews\FrontReader;
 
-use DothNews\FrontReader\Services\MenuService;
-use DothNews\FrontReader\Services\PostService;
 use Illuminate\Support\ServiceProvider;
 
 class FrontReaderServiceProvider extends ServiceProvider
