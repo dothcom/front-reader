@@ -27,6 +27,7 @@ class BannerService extends BaseService
 
         $banners = $this->bannersGroupedByType->get($code, collect());
         $selectedBanners = $banners->shuffle()->take($qtd);
+
         return $selectedBanners->toArray();
     }
 }
