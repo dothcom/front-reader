@@ -15,7 +15,8 @@ class PageService extends BaseService
 
     public function templateByType(string $page_type = 'page'): string
     {
-        $template = 'page.index';
+        $template_padrao = 'page.index';
+        $template = $template_padrao;
 
         if ($page_type == 'contact') {
             $template = 'page.contact-form';
@@ -31,6 +32,6 @@ class PageService extends BaseService
             }
         }
 
-        return $template;
+        return View::exists($template) ? $template : $template_padrao;
     }
 }
