@@ -4,7 +4,6 @@ namespace DothNews\FrontReader\Http\Controllers\Post;
 
 use DothNews\FrontReader\Http\Controllers\BaseController;
 use Dothnews\FrontReader\Services\PostService;
-use Illuminate\Support\Facades\View;
 
 class DetailPostController extends BaseController
 {
@@ -16,6 +15,7 @@ class DetailPostController extends BaseController
         ]);
 
         $template = $postService->templateByType($post->data->post_type);
+
         return view($template, ['post' => $post->data]);
     }
 }
