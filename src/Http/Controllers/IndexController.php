@@ -3,9 +3,8 @@
 namespace DothNews\FrontReader\Http\Controllers;
 
 use GuzzleHttp\Client;
-use Illuminate\Routing\Controller;
 
-class IndexController extends Controller
+class IndexController extends BaseController
 {
     // protected $client;
 

@@ -29,6 +29,9 @@
     "scripts": {
         "format": [
             "./vendor/bin/pint"
+        ],
+        "ci": [
+            "./vendor/bin/pint --test"
         ]
     }
 }

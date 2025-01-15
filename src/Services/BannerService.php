@@ -26,19 +26,7 @@ class BannerService extends BaseService
         }
 
         $banners = $this->bannersGroupedByType->get($code, collect());
-
-        $displayedBannerIds = session()->get('bannerExibido.'.$code, []);
-
-        $bannersToShow = $banners->whereNotIn('id', $displayedBannerIds);
-
-        if ($bannersToShow->isEmpty()) {
-            session()->put('bannerExibido.'.$code, []);
-            $bannersToShow = $banners;
-        }
-
-        $selectedBanners = $bannersToShow->shuffle()->take($qtd);
-
-        session()->put('bannerExibido.'.$code, array_merge($displayedBannerIds, $selectedBanners->pluck('id')->toArray()));
+        $selectedBanners = $banners->shuffle()->take($qtd);
 
         return $selectedBanners->toArray();
     }

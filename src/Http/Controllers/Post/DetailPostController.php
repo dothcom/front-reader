@@ -2,12 +2,20 @@
 
 namespace DothNews\FrontReader\Http\Controllers\Post;
 
-use Illuminate\Routing\Controller;
+use DothNews\FrontReader\Http\Controllers\BaseController;
+use Dothnews\FrontReader\Services\PostService;
 
-class DetailPostController extends Controller
+class DetailPostController extends BaseController
 {
-    public function index()
+    public function index($slug = 'titulo-do-post')
     {
-        return view('post.detail');
+        $postService = new PostService();
+        $post = $postService->getPostBySlug($slug, [
+            '_embed' => 'featuredmedia,users,categories,tags,medias',
+        ]);
+
+        $template = $postService->templateByType($post->data->post_type);
+
+        return view($template, ['post' => $post->data]);
     }
 }
