@@ -15,6 +15,7 @@
 
 2. Clone o repositório forkeado em seu computador
 
+
 3. Dentro de um projeto Laravel, crie a pasta `packages/dothcom/` na raiz do projeto
 
     ```bash
@@ -27,8 +28,25 @@
     ln -s /caminho/para/o/pacote/front-reader packages/dothcom/front-reader
     ```
 
-<!-- > **Nota:** Substitua `/caminho/para/o/pacote/front-reader` pelo caminho do pacote clonado em seu computador. -->
+    > **Nota:** A estrutura de pasta deve ser: `packages/dothcom/front-reader`
 
+5. Open the composer.json of the Laravel project and insert the following content:
+
+    ```
+    "repositories": [
+        {
+            "type": "path",
+            "url": "./packages/dothcom/front-reader"
+        }
+    ],
+    ```
+
+6. Instalando
+    ```
+    composer require dothcom/front-reader:dev-main
+    ```
+
+    
 
 
 
