@@ -9,8 +9,13 @@ Este pacote é para os temas do dothnews v6 e tem a função de se comunicar com
     composer require dothnews/front-reader
     ```
 
-## Publicação do arquivo de configuração
+    Publicação do arquivo de configuração
 
     ```bash
     ./vendor/bin/sail artisan vendor:publish --tag=front-reader-config
     ```
+
+
+## Contribuindo
+
+Veja o arquivo [CONTRIBUTING](CONTRIBUTING.md) para mais detalhes.
