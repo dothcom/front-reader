@@ -1,19 +1,16 @@
 # Front Reader for dothNews
 
-This is a package that provides functionality for reading api data from dothNews API v6.
+Este pacote é para os temas do dothnews v6 e tem a função de se comunicar com a API do dothnews para buscar as notícias.
 
-## Installation in production
+## Instalação 
 
-To install this package, you can use Composer. Run the following command in your terminal:
 
-```bash
-composer require dothnews/front-reader
-```
+    ```bash
+    composer require dothnews/front-reader
+    ```
 
-## Configuration file
+## Publicação do arquivo de configuração
 
-To publish the configuration file, run the following command in your terminal:
-
-```bash
-sail artisan vendor:publish --tag=front-reader-config
-```
+    ```bash
+    sail artisan vendor:publish --tag=front-reader-config
+    ```
