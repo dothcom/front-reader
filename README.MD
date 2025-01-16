@@ -1,6 +1,8 @@
 # Front Reader for dothNews
 
-Este pacote é para os temas do dothnews v6 e tem a função de se comunicar com a API do dothnews para buscar as notícias.
+Este pacote tem a função de se comunicar com a API do dothnews para buscar as notícias para o front-end (themes).
+
+Exemplos de uso em resources/views/ no repositório https://github.com/dothcom/vejaobem.com.br
 
 ## Instalação 
 
