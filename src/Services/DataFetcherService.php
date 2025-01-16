@@ -1,6 +1,6 @@
 <?php
 
-namespace Dothnews\FrontReader\Services;
+namespace Dothcom\FrontReader\Services;
 
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;

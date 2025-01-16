@@ -1,6 +1,6 @@
 <?php
 
-namespace DothNews\FrontReader\Http\Controllers;
+namespace Dothcom\FrontReader\Http\Controllers;
 
 use GuzzleHttp\Client;
 

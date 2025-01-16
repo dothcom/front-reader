@@ -1,6 +1,6 @@
 <?php
 
-namespace Dothnews\FrontReader;
+namespace Dothcom\FrontReader;
 
 class FrontReader
 {

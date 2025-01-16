@@ -1,6 +1,6 @@
 <?php
 
-namespace Dothnews\FrontReader\Services;
+namespace Dothcom\FrontReader\Services;
 
 class BannerService extends BaseService
 {

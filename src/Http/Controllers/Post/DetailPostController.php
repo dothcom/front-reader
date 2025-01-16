@@ -1,9 +1,9 @@
 <?php
 
-namespace DothNews\FrontReader\Http\Controllers\Post;
+namespace Dothcom\FrontReader\Http\Controllers\Post;
 
-use DothNews\FrontReader\Http\Controllers\BaseController;
-use Dothnews\FrontReader\Services\PostService;
+use Dothcom\FrontReader\Http\Controllers\BaseController;
+use Dothcom\FrontReader\Services\PostService;
 
 class DetailPostController extends BaseController
 {
