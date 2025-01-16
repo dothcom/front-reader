@@ -7,15 +7,17 @@ Exemplos de uso em resources/views/ no repositório https://github.com/dothcom/v
 ## Instalação 
 
 
-    ```bash
-    composer require dothnews/front-reader
-    ```
+Instalação do pacote via composer
 
-    Publicação do arquivo de configuração
+```bash
+composer require dothnews/front-reader
+```
 
-    ```bash
-    ./vendor/bin/sail artisan vendor:publish --tag=front-reader-config
-    ```
+Publicação do arquivo de configuração
+
+```bash
+./vendor/bin/sail artisan vendor:publish --tag=front-reader-config
+```
 
 
 ## Contribuindo
