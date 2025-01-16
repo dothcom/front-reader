@@ -1,8 +1,8 @@
 <?php
 
-namespace DothNews\FrontReader\Http\Controllers;
+namespace Dothcom\FrontReader\Http\Controllers;
 
-use Dothnews\FrontReader\Services\SettingsService;
+use Dothcom\FrontReader\Services\SettingsService;
 use Illuminate\Routing\Controller;
 
 class BaseController extends Controller

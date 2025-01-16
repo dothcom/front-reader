@@ -1,10 +1,10 @@
 {
-    "name": "dothnews/front-reader",
+    "name": "dothcom/front-reader",
     "description": "Library laravel to Consume the laranews api",
     "type": "library",
     "autoload": {
         "psr-4": {
-            "Dothnews\\FrontReader\\": "src/"
+            "Dothcom\\FrontReader\\": "src/"
         }
     },
     "authors": [
@@ -16,7 +16,7 @@
     "extra" : {
         "laravel": {
             "providers": [
-                "Dothnews\\FrontReader\\FrontReaderServiceProvider"
+                "Dothcom\\FrontReader\\FrontReaderServiceProvider"
             ]
         }
     },

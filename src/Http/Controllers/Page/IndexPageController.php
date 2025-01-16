@@ -1,9 +1,9 @@
 <?php
 
-namespace DothNews\FrontReader\Http\Controllers\Page;
+namespace Dothcom\FrontReader\Http\Controllers\Page;
 
-use DothNews\FrontReader\Http\Controllers\BaseController;
-use Dothnews\FrontReader\Services\PageService;
+use Dothcom\FrontReader\Http\Controllers\BaseController;
+use Dothcom\FrontReader\Services\PageService;
 
 class IndexPageController extends BaseController
 {

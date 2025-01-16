@@ -1,6 +1,6 @@
 <?php
 
-namespace DothNews\FrontReader;
+namespace Dothcom\FrontReader;
 
 use Illuminate\Support\ServiceProvider;
 

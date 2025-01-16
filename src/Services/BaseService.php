@@ -1,6 +1,6 @@
 <?php
 
-namespace Dothnews\FrontReader\Services;
+namespace Dothcom\FrontReader\Services;
 
 use Exception;
 use Illuminate\Pagination\LengthAwarePaginator;
