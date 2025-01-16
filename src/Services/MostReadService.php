@@ -14,7 +14,7 @@ class MostReadService extends DataFetcherService
         $url = 'https://dn-commons.nyc3.cdn.digitaloceanspaces.com/ga4_mais_lidas/'.$host.'/mais_lidas.json';
 
         $content = $this->download($url, 'json/mais_lidas/data.json', $ttl);
-        //dd($content);
+        // dd($content);
     }
 
     public function getPostsFromContent(array $content, int $limit): Collection

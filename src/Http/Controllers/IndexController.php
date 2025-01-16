@@ -15,8 +15,8 @@ class IndexController extends BaseController
 
     public function index()
     {
-        //$response = $this->client->get("https://6d7d0164796742fcb625a3fc36f32ae2.api.mockbin.io/");
-        //$news = json_decode($response->getBody(), true);
+        // $response = $this->client->get("https://6d7d0164796742fcb625a3fc36f32ae2.api.mockbin.io/");
+        // $news = json_decode($response->getBody(), true);
 
         // open front-reader config
 
@@ -25,7 +25,7 @@ class IndexController extends BaseController
 
         // dd($apiUrl, $apiKey);
 
-        //return response()->json($news);
+        // return response()->json($news);
         return view('index');
     }
 }
