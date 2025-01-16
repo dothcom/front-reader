@@ -12,5 +12,5 @@ Este pacote é para os temas do dothnews v6 e tem a função de se comunicar com
 ## Publicação do arquivo de configuração
 
     ```bash
-    sail artisan vendor:publish --tag=front-reader-config
+    ./vendor/bin/sail artisan vendor:publish --tag=front-reader-config
     ```
