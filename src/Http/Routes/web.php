@@ -20,13 +20,13 @@ Route::get('/{slug?}', function ($slug) {
     }
 
     try {
-        $pageService = new PageService;
+        $pageService = new PageService();
         $page = $pageService->getPage($slug);
         if (isset($page->data->id)) {
             return app(IndexPageController::class)->listByPage($slug);
         }
     } catch (NotFoundHttpException $e) {
-        $postService = new PostService;
+        $postService = new PostService();
         $post = $postService->getPostBySlug($slug);
 
         if (isset($post->data->id)) {
