@@ -9,7 +9,7 @@ class DetailPostController extends BaseController
 {
     public function index($slug = 'titulo-do-post')
     {
-        $postService = new PostService();
+        $postService = new PostService;
         $post = $postService->getPostBySlug($slug, [
             '_embed' => 'featuredmedia,users,categories,tags,medias',
         ]);
