@@ -22,6 +22,15 @@ class BaseService
         return $response->object();
     }
 
+    protected function tryRequest(string $url, array $options = [])
+    {
+        try {
+            return $this->makeRequest($url, $options);
+        } catch (NotFoundHttpException $e) {
+            return [];
+        }
+    }
+
     protected function handleCommonExceptions($response)
     {
         switch ($response->status()) {
