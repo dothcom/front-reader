@@ -13,7 +13,7 @@ class SettingsService extends BaseService
 
     public function getSettings()
     {
-        $url = config('front-reader.api_url').'/settings/';
+        $url = config('front-reader.api_url'). config('front-reader.api_version').'/settings/';
         $response = $this->makeRequest($url);
 
         $data = is_object($response) ? (array) $response : $response;

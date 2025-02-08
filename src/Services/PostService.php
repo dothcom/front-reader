@@ -8,7 +8,7 @@ class PostService extends BaseService
 {
     public function getLatestNews(array $options = [])
     {
-        $url = config('front-reader.api_url').'/posts/';
+        $url = config('front-reader.api_url'). config('front-reader.api_version').'/posts/';
         $response = $this->makeRequest($url, $options);
 
         return $this->paginateResponse($response);
@@ -16,7 +16,7 @@ class PostService extends BaseService
 
     public function getPostBySlug(string $slug, array $options = [])
     {
-        $url = config('front-reader.api_url').'/posts/slug/'.$slug;
+        $url = config('front-reader.api_url'). config('front-reader.api_version').'/posts/slug/'.$slug;
 
         return $this->makeRequest($url, $options);
     }

@@ -8,7 +8,7 @@ class PageService extends BaseService
 {
     public function getPage(string $slug)
     {
-        $url = config('front-reader.api_url').'/pages/slug/'.$slug;
+        $url = config('front-reader.api_url').config('front-reader.api_version').'/pages/slug/'.$slug;
 
         return $this->makeRequest($url);
     }
