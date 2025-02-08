@@ -25,7 +25,7 @@
 
     > **Nota:** A estrutura de pasta deve ser: `packages/dothcom/front-reader`
 
-4. Insira no composer.json
+4. Insira no composer.json do tema o caminho para o pacote
 
     ```
     "repositories": [
@@ -39,8 +39,21 @@
     "minimum-stability": "dev",
     ```
 
-5. Instale o pacote
+5. Instale o pacote junto ao projeto
 
     ```bash
     composer require dothcom/front-reader:dev-main
+    ```
+
+6. Publique os arquivos necessários
+
+    ```bash
+    php artisan vendor:publish --tag=front-reader-config
+    ```
+
+7. Entre no diretório do pacote e instale as dependências
+
+    ```bash
+    cd packages/dothcom/front-reader
+    composer install
     ```

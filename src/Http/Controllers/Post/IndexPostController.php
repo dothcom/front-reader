@@ -21,7 +21,7 @@ class IndexPostController extends Controller
 
         // open front-reader config
 
-        // $apiUrl = config('front-reader.api_url');
+        // $apiUrl = config('front-reader.api_url'). config('front-reader.api_version');
         // $apiKey = config('front-reader.api_key');
 
         // return response()->json($news);
