@@ -10,7 +10,7 @@ class PageService extends BaseService
     {
         $url = config('front-reader.api_url').config('front-reader.api_version').'/pages/slug/'.$slug;
 
-        return $this->makeRequest($url);
+        return $this->tryRequest($url);
     }
 
     public function templateByType(string $page_type = 'page'): string

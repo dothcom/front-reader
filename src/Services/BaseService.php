@@ -11,7 +11,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class BaseService
 {
-    protected function makeRequest(string $url, array $options = [])
+    private function makeRequest(string $url, array $options = [])
     {
         $response = Http::accept('application/json')
             ->withToken(config('front-reader.api_key'))
@@ -24,10 +24,13 @@ class BaseService
 
     protected function tryRequest(string $url, array $options = [])
     {
+        
         try {
             return $this->makeRequest($url, $options);
         } catch (NotFoundHttpException $e) {
             return [];
+        } catch (Exception $e) {
+            throw new Exception("Erro ao tentar se comunicar com a API: " . $e->getMessage());
         }
     }
 
