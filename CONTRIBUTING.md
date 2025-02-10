@@ -1,6 +1,12 @@
 
 # Contribuindo
 
+# Requisitos
+
+- Composer instalado na sua máquina
+- API do dothnews rodando
+- Tema default instalado e rodando
+
 ## Patterns
 
     Todos os códigos necessitam seguir o PSR12
@@ -11,11 +17,13 @@
 1. Faça o fork do repositório [front-reader](https://github.com/dothcom/front-reader)
 
 
-2. Dentro de um projeto Laravel, crie a pasta `packages/dothcom/` na raiz do projeto
+2. Dentro de um projeto de tema, crie a pasta `packages/dothcom/` na raiz do projeto. 
 
     ```bash
     mkdir -p packages/dothcom/
     ```
+
+    Adicione ao .gitignore do projeto a pasta `packages/`
 
 3. Clone o repositório forkado dentro da pasta `packages/dothcom/`
 
@@ -39,16 +47,16 @@
     "minimum-stability": "dev",
     ```
 
-5. Instale o pacote junto ao projeto
+5. Instale o pacote no projeto do tema default
 
     ```bash
-    composer require dothcom/front-reader:dev-main
+    sail composer require dothcom/front-reader:dev-main
     ```
 
 6. Publique os arquivos necessários
 
     ```bash
-    php artisan vendor:publish --tag=front-reader-config
+    sail php artisan vendor:publish --tag=front-reader-config
     ```
 
 7. Entre no diretório do pacote e instale as dependências
