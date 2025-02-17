@@ -13,6 +13,10 @@ class IndexPageController extends BaseController
         $page = $pageService->getPage($slug);
         $template = $pageService->templateByType($page->data->page_type);
 
+        if ($page->data->visibility != 'publish') {
+            return view('errors.404');
+        }
+
         $data = [
             'slug' => $slug,
             'page' => $page->data,
