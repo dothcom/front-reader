@@ -13,7 +13,7 @@ class BaseService
 {
     private function makeRequest(string $url, array $options = [])
     {
-        $formatUserAgent = function (string $text, string $version = '1.0'): string {
+        $formatUserAgent = function (string $text, string $version = '7'): string {
             $text = preg_replace('/[^a-zA-Z0-9 ]/', '', $text);
             //$text = str_replace(' ', '', ucwords(strtolower($text)));
 
