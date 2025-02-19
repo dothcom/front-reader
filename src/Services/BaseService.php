@@ -15,7 +15,7 @@ class BaseService
     {
         $formatUserAgent = function (string $text, string $version = '7'): string {
             $text = preg_replace('/[^a-zA-Z0-9. ]/', '', $text);
-            return 'SGI - GuzzleHttp/'.$version.' '.$text;
+            return 'FrontReader; GuzzleHttp/'.$version.'; '.$text;
         };
 
         $response = Http::accept('application/json')
