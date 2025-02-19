@@ -14,10 +14,8 @@ class BaseService
     private function makeRequest(string $url, array $options = [])
     {
         $formatUserAgent = function (string $text, string $version = '7'): string {
-            $text = preg_replace('/[^a-zA-Z0-9 ]/', '', $text);
-            //$text = str_replace(' ', '', ucwords(strtolower($text)));
-
-            return 'GuzzleFrontReader/'.$text.'/'.$version;
+            $text = preg_replace('/[^a-zA-Z0-9. ]/', '', $text);
+            return 'SGI - GuzzleHttp/'.$version.' '.$text;
         };
 
         $response = Http::accept('application/json')
@@ -26,7 +24,7 @@ class BaseService
                 'Content-Type' => 'application/json',
                 'Accept' => 'application/json',
                 'X-Forwarded-For' => request()->ip(),
-                'User-Agent' => $formatUserAgent(env('APP_NAME'))
+                'User-Agent' => $formatUserAgent(request()->getHost())
             ])
             ->get($url, $options);
 
