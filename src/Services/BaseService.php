@@ -15,6 +15,11 @@ class BaseService
     {
         $response = Http::accept('application/json')
             ->withToken(config('front-reader.api_key'))
+            ->withHeaders([
+                'Content-Type' => 'application/json',
+                'Accept' => 'application/json',
+                'X-Forwarded-For' => request()->ip()
+            ])
             ->get($url, $options);
 
         $this->handleCommonExceptions($response);
