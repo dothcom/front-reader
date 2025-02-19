@@ -13,12 +13,20 @@ class BaseService
 {
     private function makeRequest(string $url, array $options = [])
     {
+        $formatUserAgent = function (string $text, string $version = '1.0'): string {
+            $text = preg_replace('/[^a-zA-Z0-9 ]/', '', $text);
+            //$text = str_replace(' ', '', ucwords(strtolower($text)));
+
+            return 'GuzzleFrontReader/'.$text.'/'.$version;
+        };
+
         $response = Http::accept('application/json')
             ->withToken(config('front-reader.api_key'))
             ->withHeaders([
                 'Content-Type' => 'application/json',
                 'Accept' => 'application/json',
-                'X-Forwarded-For' => request()->ip()
+                'X-Forwarded-For' => request()->ip(),
+                'User-Agent' => $formatUserAgent(env('APP_NAME'))
             ])
             ->get($url, $options);
 
