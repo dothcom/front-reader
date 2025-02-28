@@ -19,7 +19,7 @@ class BaseService
                 'Content-Type' => 'application/json',
                 'Accept' => 'application/json',
                 'X-Forwarded-For' => request()->ip(),
-                'User-Agent' => request()->header('User-Agent'),
+                'User-Agent' => request()->header('User-Agent'). ' - FrontReader',
             ])
             ->get($url, $options);
 
