@@ -9,6 +9,7 @@ class PostService extends BaseService
     public function getLatestNews(array $options = [])
     {
         $url = config('front-reader.api_url'). config('front-reader.api_version').'/posts/';
+        $options['status'] = 'published';
         $response = $this->tryRequest($url, $options);
 
         return $this->paginateResponse($response);
@@ -17,6 +18,12 @@ class PostService extends BaseService
     public function getPostBySlug(string $slug, array $options = [])
     {
         $url = config('front-reader.api_url'). config('front-reader.api_version').'/posts/slug/'.$slug;
+
+        $response = $this->tryRequest($url, $options);
+
+        if (!$this->isPublished($response->data)) {
+            return false;
+        }
 
         return $this->tryRequest($url, $options);
     }
@@ -90,5 +97,14 @@ class PostService extends BaseService
         }
 
         return null;
+    }
+
+    private function isPublished($post)
+    {
+        if ($post->visibility === 'Publish' and $post->published_at <= now()) {
+            return true;
+        }
+
+        return false;
     }
 }
