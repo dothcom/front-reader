@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Http;
 use InvalidArgumentException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Log;
 
 class BaseService
 {
@@ -26,7 +25,7 @@ class BaseService
             ->get($url, $options);
 
         $this->handleCommonExceptions($response);
-        Log::info('makeRequest', ['url' => $url]);
+        // \Illuminate\Support\Facades\Log::info('makeRequest', ['url' => $url]);
         return $response->object();
     }
 
@@ -35,19 +34,15 @@ class BaseService
         $cacheKey = md5($url . serialize($options));
 
         if ($useCache && Cache::has($cacheKey)) {
-            Log::info('Cache hit', ['url' => $url , 'cacheSeconds' => $cacheSeconds]);
             return Cache::get($cacheKey);
         }
 
-        $response = $this->makeRequest($url, $options);
-        if ($useCache) {
-            Cache::put($cacheKey, $response, $cacheSeconds);
-        }
-
-        return $response;
-
         try {
-            return $this->makeRequest($url, $options);
+            $response = $this->makeRequest($url, $options);
+            if ($useCache) {
+                Cache::put($cacheKey, $response, $cacheSeconds);
+            }
+            return $response;
         } catch (NotFoundHttpException $e) {
             return [];
         } catch (Exception $e) {
