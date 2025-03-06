@@ -8,6 +8,8 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Http;
 use InvalidArgumentException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Log;
 
 class BaseService
 {
@@ -24,12 +26,26 @@ class BaseService
             ->get($url, $options);
 
         $this->handleCommonExceptions($response);
-
+        Log::info('makeRequest', ['url' => $url]);
         return $response->object();
     }
 
-    protected function tryRequest(string $url, array $options = [])
+    protected function tryRequest(string $url, array $options = [], bool $useCache = false, int $cacheSeconds = 10)
     {
+        $cacheKey = md5($url . serialize($options));
+
+        if ($useCache && Cache::has($cacheKey)) {
+            Log::info('Cache hit', ['url' => $url , 'cacheSeconds' => $cacheSeconds]);
+            return Cache::get($cacheKey);
+        }
+
+        $response = $this->makeRequest($url, $options);
+        if ($useCache) {
+            Cache::put($cacheKey, $response, $cacheSeconds);
+        }
+
+        return $response;
+
         try {
             return $this->makeRequest($url, $options);
         } catch (NotFoundHttpException $e) {
