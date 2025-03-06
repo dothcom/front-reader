@@ -8,7 +8,7 @@ class MenuService extends BaseService
     {
         $url = config('front-reader.api_url'). config('front-reader.api_version').'/menus/identifier/'.$identifier;
 
-        return $this->tryRequest($url);
+        return $this->tryRequest($url, [], true, 10);
     }
 
     /**
