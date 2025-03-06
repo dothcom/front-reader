@@ -9,6 +9,8 @@ class IndexPageController extends BaseController
 {
     public function index($slug = 'ultimas-noticias')
     {
+        $segments = array_filter(explode('/', $slug));
+        $slug = end($segments);
         $pageService = new PageService();
         $page = $pageService->getPage($slug);
 
