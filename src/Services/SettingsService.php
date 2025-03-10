@@ -22,9 +22,9 @@ class SettingsService extends BaseService
         return $data['data'] ?? [];
     }
 
-    public function getConfig($name)
+    public function getConfig($name, $group='general')
     {
-        $config = collect($this->settings)->firstWhere('name', $name);
+        $config = collect($this->settings)->where('group', $group)->where('name', $name)->first();
 
         return $config ? $config->payload : '';
     }
