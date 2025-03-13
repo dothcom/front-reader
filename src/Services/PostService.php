@@ -8,9 +8,13 @@ class PostService extends BaseService
 {
     public function getLatestNews(array $options = [])
     {
-        $url = config('front-reader.api_url'). config('front-reader.api_version').'/posts/';
+        $url = config('front-reader.api_url').config('front-reader.api_version').'/posts/';
         $options['status'] = 'published';
         $response = $this->tryRequest($url, $options);
+
+        if (isset($response->message) || isset($response->errors)) {
+            return $response;
+        }
 
         return $this->paginateResponse($response);
     }
