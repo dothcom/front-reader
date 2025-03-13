@@ -15,7 +15,7 @@ class SettingsService extends BaseService
     {
         $url = config('front-reader.api_url'). config('front-reader.api_version').'/settings/';
 
-        $response = $this->tryRequest($url, [], true, 10);
+        $response = $this->tryRequest($url, ['per_page' => 100], true, 10);
 
         $data = is_object($response) ? (array) $response : $response;
 
