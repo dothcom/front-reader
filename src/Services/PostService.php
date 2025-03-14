@@ -25,7 +25,7 @@ class PostService extends BaseService
 
         $response = $this->tryRequest($url, $options);
 
-        if (!$this->isPublished($response->data)) {
+        if (!isset($response->data) || !$this->isPublished($response->data)) {
             return false;
         }
 
