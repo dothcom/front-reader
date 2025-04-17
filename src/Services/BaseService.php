@@ -5,10 +5,10 @@ namespace Dothcom\FrontReader\Services;
 use Exception;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 use InvalidArgumentException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Illuminate\Support\Facades\Cache;
 
 class BaseService
 {
@@ -20,18 +20,19 @@ class BaseService
                 'Content-Type' => 'application/json',
                 'Accept' => 'application/json',
                 'X-Forwarded-For' => request()->ip(),
-                'User-Agent' => request()->header('User-Agent'). ' - FrontReader',
+                'User-Agent' => request()->header('User-Agent').' - FrontReader',
             ])
             ->get($url, $options);
 
         $this->handleCommonExceptions($response);
+
         // \Illuminate\Support\Facades\Log::info('makeRequest', ['url' => $url]);
         return $response->object();
     }
 
     protected function tryRequest(string $url, array $options = [], bool $useCache = false, int $cacheSeconds = 10)
     {
-        $cacheKey = md5($url . serialize($options));
+        $cacheKey = md5($url.serialize($options));
 
         if ($useCache && Cache::has($cacheKey)) {
             return Cache::get($cacheKey);
@@ -42,11 +43,12 @@ class BaseService
             if ($useCache) {
                 Cache::put($cacheKey, $response, $cacheSeconds);
             }
+
             return $response;
         } catch (NotFoundHttpException $e) {
             return [];
         } catch (Exception $e) {
-            throw new Exception("Erro ao tentar se comunicar com a API: " . $e->getMessage());
+            throw new Exception('Erro ao tentar se comunicar com a API: '.$e->getMessage());
         }
     }
 

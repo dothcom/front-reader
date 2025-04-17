@@ -13,7 +13,7 @@ class SettingsService extends BaseService
 
     public function getSettings()
     {
-        $url = config('front-reader.api_url'). config('front-reader.api_version').'/settings/';
+        $url = config('front-reader.api_url').config('front-reader.api_version').'/settings/';
 
         $response = $this->tryRequest($url, ['per_page' => 100], true, 10);
 
@@ -22,7 +22,7 @@ class SettingsService extends BaseService
         return $data['data'] ?? [];
     }
 
-    public function getConfig($name, $group='general')
+    public function getConfig($name, $group = 'general')
     {
         $config = collect($this->settings)->where('group', $group)->where('name', $name)->first();
 

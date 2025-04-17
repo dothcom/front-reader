@@ -15,7 +15,7 @@ class FrontReaderServiceProvider extends ServiceProvider
         $this->loadRoutesFrom(__DIR__.'/Http/Routes/web.php');
 
         try {
-            $pageService = new PageService;
+            $pageService = new PageService();
             $slugs = $pageService->getSlugs();
 
             Route::middleware('web')->group(function () use ($slugs) {
