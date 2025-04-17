@@ -13,6 +13,13 @@ class PageService extends BaseService
         return $this->tryRequest($url);
     }
 
+    public function getSlugs()
+    {
+        $url = config('front-reader.api_url').config('front-reader.api_version').'/pages/slugs/';
+
+        return $this->tryRequest($url);
+    }
+
     public function templateByType(string $page_type = 'page'): string
     {
         $template_padrao = 'page.index';

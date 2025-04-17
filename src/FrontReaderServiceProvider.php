@@ -2,6 +2,9 @@
 
 namespace Dothcom\FrontReader;
 
+use Dothcom\FrontReader\Http\Controllers\Page\IndexPageController;
+use Dothcom\FrontReader\Services\PageService;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 
 class FrontReaderServiceProvider extends ServiceProvider
@@ -10,6 +13,21 @@ class FrontReaderServiceProvider extends ServiceProvider
     {
         // The loadRoutesFrom method is used to load routes from a file within your package.
         $this->loadRoutesFrom(__DIR__.'/Http/Routes/web.php');
+
+        try {
+            $pageService = new PageService;
+            $slugs = $pageService->getSlugs();
+
+            Route::middleware('web')->group(function () use ($slugs) {
+                foreach ($slugs as $slug) {
+                    Route::get("/{$slug}", function () use ($slug) {
+                        return app(IndexPageController::class)->listByPage($slug);
+                    })->name("pages.show.{$slug}");
+                }
+            });
+        } catch (\Throwable $e) {
+            \Log::error('Error registering dynamic routes: '.$e->getMessage());
+        }
 
         // THE publishes METHOD is used to publish the configuration file to the application's config directory,
         // using command php artisan vendor:publish --tag=front-reader-config
