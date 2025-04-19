@@ -7,7 +7,7 @@ use Dothcom\FrontReader\Services\PageService;
 
 class IndexPageController extends BaseController
 {
-    public function index($slug = 'ultimas-noticias')
+    public function index($slug)
     {
         $pageService = new PageService();
         $page = $pageService->getPage($slug);
