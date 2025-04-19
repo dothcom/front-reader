@@ -6,17 +6,37 @@ use Dothcom\FrontReader\Http\Controllers\Page\IndexPageController;
 use Dothcom\FrontReader\Services\PageService;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Log;
 
 class FrontReaderServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        // The loadRoutesFrom method is used to load routes from a file within your package.
+        $this->registerRoutes();
+
+        $this->publishConfig();
+    }
+
+    public function register()
+    {
+    }
+
+    /**
+     * Register the routes/pages for the package. 
+     * This method will dynamically create routes based on the slugs
+     *
+     * @return void
+     */
+    private function registerRoutes()
+    {
         $this->loadRoutesFrom(__DIR__.'/Http/Routes/web.php');
 
         try {
-            $pageService = new PageService();
-            $slugs = $pageService->getSlugs();
+            $slugs = Cache::remember('front-reader.slugs', 600, function () {
+                $pageService = new PageService();
+                return $pageService->getSlugs();
+            });
 
             Route::middleware('web')->group(function () use ($slugs) {
                 foreach ($slugs as $slug) {
@@ -26,24 +46,20 @@ class FrontReaderServiceProvider extends ServiceProvider
                 }
             });
         } catch (\Throwable $e) {
-            \Log::error('Error registering dynamic routes: '.$e->getMessage());
+            Log::error('Error registering dynamic routes: '.$e->getMessage());
         }
+    }
 
-        // THE publishes METHOD is used to publish the configuration file to the application's config directory,
-        // using command php artisan vendor:publish --tag=front-reader-config
+    /**
+     * Used to publish the configuration file to the application's config directory,
+     * ex: php artisan vendor:publish --tag=front-reader-config
+     *
+     * @return void
+     */
+    private function publishConfig()
+    {
         $this->publishes([
             __DIR__.'/config/front-reader.php' => config_path('front-reader.php'),
         ], 'front-reader-config');
-    }
-
-    public function register()
-    {
-        // $this->app->singleton(PostService::class, function ($app) {
-        //     return new PostService();
-        // });
-
-        // $this->app->singleton(MenuService::class, function ($app) {
-        //     return new MenuService();
-        // });
     }
 }
