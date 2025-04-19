@@ -23,7 +23,7 @@ class FrontReaderServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register the routes/pages for the package. 
+     * Register the routes/pages for the package.
      * This method will dynamically create routes based on the slugs
      *
      * @return void
