@@ -19,7 +19,27 @@ Publicação do arquivo de configuração
 ./vendor/bin/sail artisan vendor:publish --tag=front-reader-config
 ```
 
+No composer.json, adicione o dont-discover para evitar que o pacote seja carregado em produção:
 
+```json
+"dont-discover": [
+    "dothcom/front-reader"
+]
+```
+
+No AppServiceProvider.php, adicione registre o FrontReaderServiceProvider:
+
+```php
+use Dothcom\FrontReader;
+
+/**
+ * Register any application services.
+ */
+public function register(): void
+{
+    $this->app->register(FrontReader\FrontReaderServiceProvider::class);
+}
+```
 ## Contribuindo
 
 Veja o arquivo [CONTRIBUTING](CONTRIBUTING.md) para mais detalhes.
