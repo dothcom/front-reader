@@ -21,11 +21,11 @@ class PostService extends BaseService
 
     public function getPostBySlug(string $slug, array $options = [])
     {
-        $url = config('front-reader.api_url'). config('front-reader.api_version').'/posts/slug/'.$slug;
+        $url = config('front-reader.api_url').config('front-reader.api_version').'/posts/slug/'.$slug;
 
         $response = $this->tryRequest($url, $options);
 
-        if (!isset($response->data) || !$this->isPublished($response->data)) {
+        if (! isset($response->data) || ! $this->isPublished($response->data)) {
             return false;
         }
 
