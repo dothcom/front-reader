@@ -19,6 +19,7 @@ Publicação do arquivo de configuração
 ./vendor/bin/sail artisan vendor:publish --tag=front-reader-config
 ```
 
+
 ## Contribuindo
 
 Veja o arquivo [CONTRIBUTING](CONTRIBUTING.md) para mais detalhes.
