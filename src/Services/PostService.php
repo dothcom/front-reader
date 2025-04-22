@@ -8,9 +8,8 @@ class PostService extends BaseService
 {
     public function getLatestNews(array $options = [])
     {
-        $url = config('front-reader.api_url').config('front-reader.api_version').'/posts/';
         $options['status'] = 'published';
-        $response = $this->tryRequest($url, $options);
+        $response = $this->tryRequest('/posts/', $options);
 
         if (isset($response->message) || isset($response->errors)) {
             return $response;
@@ -21,7 +20,7 @@ class PostService extends BaseService
 
     public function getPostBySlug(string $slug, array $options = [])
     {
-        $url = config('front-reader.api_url').config('front-reader.api_version').'/posts/slug/'.$slug;
+        $url = '/posts/slug/'.$slug;
 
         $response = $this->tryRequest($url, $options);
 

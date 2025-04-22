@@ -12,6 +12,14 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class BaseService
 {
+    public $apiUrl;
+    public $apiVersion;
+
+    protected function getApiUrl(): string
+    {
+        return config('front-reader.api_url') . config('front-reader.api_version');
+    }
+
     private function makeRequest(string $url, array $options = [])
     {
         $response = Http::accept('application/json')
@@ -30,9 +38,11 @@ class BaseService
         return $response->object();
     }
 
-    protected function tryRequest(string $url, array $options = [], bool $useCache = false, int $cacheSeconds = 10)
+    protected function tryRequest(string $endpoint, array $options = [], bool $useCache = false, int $cacheSeconds = 10)
     {
-        $cacheKey = md5($url.serialize($options));
+        $url = $this->getApiUrl().$endpoint;
+
+        $cacheKey = md5($endpoint . json_encode($options, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_NUMERIC_CHECK));
 
         if ($useCache && Cache::has($cacheKey)) {
             return Cache::get($cacheKey);
