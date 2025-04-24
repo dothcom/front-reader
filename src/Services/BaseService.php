@@ -23,7 +23,6 @@ class BaseService
     private function makeRequest(string $url, array $options = [])
     {
         $response = Http::accept('application/json')
-            ->withToken(config('front-reader.api_key'))
             ->withHeaders([
                 'Content-Type' => 'application/json',
                 'Accept' => 'application/json',

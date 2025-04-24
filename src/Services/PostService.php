@@ -8,7 +8,7 @@ class PostService extends BaseService
 {
     public function getLatestNews(array $options = [])
     {
-        $options['status'] = 'published';
+        
         $response = $this->tryRequest('/posts/', $options);
 
         if (isset($response->message) || isset($response->errors)) {
