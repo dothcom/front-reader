@@ -9,7 +9,7 @@ class IndexPageController extends BaseController
 {
     public function index($slug)
     {
-        $pageService = new PageService;
+        $pageService = new PageService();
         $page = $pageService->getPage($slug);
 
         if (! isset($page->data->id) || (isset($page->data->visibility) && $page->data->visibility != 'publish')) {
