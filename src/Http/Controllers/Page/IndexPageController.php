@@ -12,10 +12,6 @@ class IndexPageController extends BaseController
         $pageService = new PageService();
         $page = $pageService->getPage($slug);
 
-        if (! isset($page->data->id) || (isset($page->data->visibility) && $page->data->visibility != 'publish')) {
-            abort(404);
-        }
-
         $template = $pageService->templateByType($page->data->page_type);
 
         if (! view()->exists($template)) {

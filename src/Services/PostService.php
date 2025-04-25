@@ -23,7 +23,7 @@ class PostService extends BaseService
 
         $response = $this->tryRequest($url, $options);
 
-        if (! isset($response->data) || ! $this->isPublished($response->data)) {
+        if (! isset($response->data)) {
             return false;
         }
 
@@ -99,14 +99,5 @@ class PostService extends BaseService
         }
 
         return null;
-    }
-
-    private function isPublished($post)
-    {
-        if ($post->visibility === 'Publish' and $post->published_at <= now()) {
-            return true;
-        }
-
-        return false;
     }
 }
