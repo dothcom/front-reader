@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 use InvalidArgumentException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpKernel\Exception\TooManyRequestsHttpException;
 
 class BaseService
 {
@@ -54,6 +55,8 @@ class BaseService
             }
 
             return $response;
+        } catch (TooManyRequestsHttpException $e) {
+            throw $e;
         } catch (NotFoundHttpException $e) {
             return [];
         } catch (Exception $e) {
@@ -70,6 +73,9 @@ class BaseService
                 throw new Exception('Forbidden - Maybe Unauthorized API Key');
             case 404:
                 throw new NotFoundHttpException('Resource not found');
+            case 429:
+                $retryAfter = $response->header('Retry-After') ?? 300;
+                throw new TooManyRequestsHttpException($retryAfter, 'Too Many Requests');
             case 500:
                 throw new Exception('Internal Server Error');
         }
