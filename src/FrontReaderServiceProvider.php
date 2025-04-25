@@ -4,10 +4,10 @@ namespace Dothcom\FrontReader;
 
 use Dothcom\FrontReader\Http\Controllers\Page\IndexPageController;
 use Dothcom\FrontReader\Services\PageService;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\ServiceProvider;
 
 class FrontReaderServiceProvider extends ServiceProvider
 {
@@ -35,6 +35,7 @@ class FrontReaderServiceProvider extends ServiceProvider
         try {
             $slugs = Cache::remember('front-reader.slugs', 600, function () {
                 $pageService = new PageService();
+
                 return $pageService->getSlugs();
             });
 

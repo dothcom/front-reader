@@ -9,15 +9,17 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 use InvalidArgumentException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpKernel\Exception\TooManyRequestsHttpException;
 
 class BaseService
 {
     public $apiUrl;
+
     public $apiVersion;
 
     protected function getApiUrl(): string
     {
-        return config('front-reader.api_url') . config('front-reader.api_version');
+        return config('front-reader.api_url').config('front-reader.api_version');
     }
 
     private function makeRequest(string $url, array $options = [])
@@ -41,7 +43,7 @@ class BaseService
     {
         $url = $this->getApiUrl().$endpoint;
 
-        $cacheKey = md5($endpoint . json_encode($options, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_NUMERIC_CHECK));
+        $cacheKey = md5($endpoint.json_encode($options, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_NUMERIC_CHECK));
 
         if ($useCache && Cache::has($cacheKey)) {
             return Cache::get($cacheKey);
@@ -54,6 +56,8 @@ class BaseService
             }
 
             return $response;
+        } catch (TooManyRequestsHttpException $e) {
+            throw $e;
         } catch (NotFoundHttpException $e) {
             return [];
         } catch (Exception $e) {
@@ -70,6 +74,9 @@ class BaseService
                 throw new Exception('Forbidden - Maybe Unauthorized API Key');
             case 404:
                 throw new NotFoundHttpException('Resource not found');
+            case 429:
+                $retryAfter = $response->header('Retry-After') ?? 300;
+                throw new TooManyRequestsHttpException($retryAfter, 'Too Many Requests');
             case 500:
                 throw new Exception('Internal Server Error');
         }
