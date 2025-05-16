@@ -28,9 +28,12 @@ Route::get('/{slug?}', function ($slug) {
     try {
         $pageService = new PageService();
         $page = $pageService->getPage($slug);
-        if (isset($page->data->id)) {
-            return app(IndexPageController::class)->listByPage($slug);
+
+        if (!isset($page->data->id)) {
+            throw new NotFoundHttpException();
         }
+
+        return app(IndexPageController::class)->listByPage($slug);
     } catch (NotFoundHttpException $e) {
         $postService = new PostService();
         $post = $postService->getPostBySlug($slug);
