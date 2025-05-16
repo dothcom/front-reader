@@ -6,8 +6,8 @@ class MediaService extends BaseService
 {
     public function getMedia(string $uuid, array $options = [])
     {
-        $url = config('front-reader.api_url').'/medias/'.$uuid;
+        $endpoint = '/medias/'.$uuid;
 
-        return $this->makeRequest($url, $options);
+        return $this->tryRequest($endpoint, $options);
     }
 }

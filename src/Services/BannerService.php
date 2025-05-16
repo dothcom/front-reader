@@ -9,8 +9,8 @@ class BannerService extends BaseService
     public function listBanner()
     {
         $options = ['per_page' => 100];
-        $url = config('front-reader.api_url').'/banners/';
-        $response = $this->makeRequest($url, $options);
+        $endpoint = '/banners/';
+        $response = $this->tryRequest($endpoint, $options);
 
         $this->bannersGroupedByType = collect($response->data)->groupBy(function ($banner) {
             return $banner->type->slug;

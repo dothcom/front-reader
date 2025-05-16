@@ -9,6 +9,13 @@ use Dothcom\FrontReader\Services\PostService;
 use Illuminate\Support\Facades\Route;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
+// debug env vars inline
+Route::get('/_debug', function () {
+    // print env DOTHNEWS_API_BASE_URL
+    echo 'DOTHNEWS_API_BASE_URL: '.env('DOTHNEWS_API_BASE_URL').'<br>';
+    echo 'DOTHNEWS_API_VERSION: '.env('DOTHNEWS_API_VERSION').'<br>';
+});
+
 Route::get('/', [IndexController::class, 'index'])->name('home');
 Route::get('/busca', [SearchController::class, 'index'])->name('search.index');
 Route::get('/ultimas-noticias', [IndexPageController::class, 'index'])->name('pages.index');
@@ -18,7 +25,6 @@ Route::get('/{slug?}', function ($slug) {
         $segments = array_filter(explode('/', $slug));
         $slug = end($segments);
     }
-
     try {
         $pageService = new PageService();
         $page = $pageService->getPage($slug);
@@ -35,4 +41,5 @@ Route::get('/{slug?}', function ($slug) {
     } catch (\Exception $e) {
         abort(404, $e->getMessage());
     }
-})->where('slug', '^[a-zA-Z0-9-_\/]+$')->name('posts.detail');
+})->where('slug', '^[a-zA-Z0-9-_\/]*$')->name('posts.detail');
+

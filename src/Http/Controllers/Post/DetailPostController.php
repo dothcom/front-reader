@@ -14,6 +14,10 @@ class DetailPostController extends BaseController
             '_embed' => 'featuredmedia,users,categories,tags,medias',
         ]);
 
+        if (! $post) {
+            return abort(404);
+        }
+
         $template = $postService->templateByType($post->data->post_type);
 
         return view($template, ['post' => $post->data]);
