@@ -12,7 +12,7 @@ class SearchController extends BaseController
     {
         $options = [
             'per_page' => 10,
-            '_embed' => 'featuredmedia,categories',
+            '_embed' => 'featuredmedia',
             'q' => $request->query('q'),
             'page' => $request->get('page', 1),
         ];
