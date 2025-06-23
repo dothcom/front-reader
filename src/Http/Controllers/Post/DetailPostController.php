@@ -11,7 +11,7 @@ class DetailPostController extends BaseController
     {
         $postService = new PostService();
         $post = $postService->getPostBySlug($slug, [
-            '_embed' => 'featuredmedia,users,categories,tags,medias',
+            '_embed' => 'featuredmedia,users,pages,tags,medias',
         ]);
 
         if (! $post) {
