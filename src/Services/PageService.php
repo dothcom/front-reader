@@ -30,7 +30,7 @@ class PageService extends BaseService
         } elseif ($page_type == 'html') {
             $template = 'page.html';
         } elseif ($page_type == 'news') {
-            $template = 'category.index';
+            $template = 'post.index';
         } elseif (str_starts_with($page_type, 'news-') || str_starts_with($page_type, 'page-')) {
             $tpl = str_replace(['news-', 'page-'], ['news.', 'page.'], $page_type);
 
