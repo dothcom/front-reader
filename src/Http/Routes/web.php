@@ -24,7 +24,7 @@ Route::get('/post/{slug?}', function ($slug) {
         $slug = end($segments);
     }
     try {
-        $postService = new PostService;
+        $postService = new PostService();
         $post = $postService->getPostBySlug($slug);
 
         if (isset($post->data->id)) {
