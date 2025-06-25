@@ -18,9 +18,7 @@ class FrontReaderServiceProvider extends ServiceProvider
         $this->publishConfig();
     }
 
-    public function register()
-    {
-    }
+    public function register() {}
 
     /**
      * Register the routes/pages for the package.
@@ -34,7 +32,8 @@ class FrontReaderServiceProvider extends ServiceProvider
 
         try {
             $pages = Cache::remember('front-reader.pages', 600, function () {
-                $pageService = new PageService();
+                $pageService = new PageService;
+
                 return $pageService->getUrls();
             });
 
@@ -68,7 +67,7 @@ class FrontReaderServiceProvider extends ServiceProvider
                 }
             }
         } catch (\Throwable $e) {
-            Log::error('Error registering dynamic routes: ' . $e->getMessage());
+            Log::error('Error registering dynamic routes: '.$e->getMessage());
             throw $e;
         }
     }

@@ -11,7 +11,7 @@ class IndexPageController extends BaseController
     {
         $segments = array_filter(explode('/', $slug));
         $slug = end($segments);
-        $pageService = new PageService();
+        $pageService = new PageService;
         $page = $pageService->getPage($slug);
 
         $template = $pageService->templateByType($page->data->page_type);
