@@ -33,21 +33,43 @@ class FrontReaderServiceProvider extends ServiceProvider
         $this->loadRoutesFrom(__DIR__.'/Http/Routes/web.php');
 
         try {
-            $slugs = Cache::remember('front-reader.slugs', 600, function () {
+            $pages = Cache::remember('front-reader.pages', 600, function () {
                 $pageService = new PageService();
-
-                return $pageService->getSlugs();
+                return $pageService->getUrls();
             });
 
-            Route::middleware('web')->group(function () use ($slugs) {
-                foreach ($slugs as $slug) {
-                    Route::get("/{$slug}", function () use ($slug) {
-                        return app(IndexPageController::class)->listByPage($slug);
-                    })->name("pages.show.{$slug}");
+            if (empty($pages)) {
+                return;
+            }
+
+            Route::middleware('web')->group(function () use ($pages) {
+                foreach ($pages as $page) {
+                    if (($page->is_external ?? false) || $page->url === '/') {
+                        continue;
+                    }
+
+                    $url = trim($page->url, '/');
+                    $routeName = "pages.show.{$page->slug}";
+
+                    Log::debug("Registrando rota: {$url} => {$routeName}");
+
+                    Route::get("/{$url}", function () use ($page) {
+                        return app(IndexPageController::class)->listByPage($page->slug);
+                    })->name($routeName);
                 }
             });
+
+            $allRoutes = Route::getRoutes()->getRoutes();
+            $registeredPagesRoutes = [];
+
+            foreach ($allRoutes as $route) {
+                if (str_starts_with($route->getName() ?? '', 'pages.show.')) {
+                    $registeredPagesRoutes[] = $route->getName();
+                }
+            }
         } catch (\Throwable $e) {
-            Log::error('Error registering dynamic routes: '.$e->getMessage());
+            Log::error('Error registering dynamic routes: ' . $e->getMessage());
+            throw $e;
         }
     }
 

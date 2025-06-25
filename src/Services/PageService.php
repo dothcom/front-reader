@@ -13,9 +13,9 @@ class PageService extends BaseService
         return $this->tryRequest($endpoint);
     }
 
-    public function getSlugs()
+    public function getUrls()
     {
-        $endpoint = '/pages/slugs/';
+        $endpoint = '/pages/urls/';
 
         return $this->tryRequest($endpoint);
     }

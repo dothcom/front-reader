@@ -98,10 +98,8 @@ class BaseService
             }
         }
 
-        $items = $response->data instanceof Collection ? $response->data : collect($response->data);
-
         return new LengthAwarePaginator(
-            $items,
+            $response->data,
             $response->meta->total,
             $response->meta->per_page,
             $response->meta->current_page,

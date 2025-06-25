@@ -20,21 +20,12 @@ Route::get('/', [IndexController::class, 'index'])->name('home');
 Route::get('/busca', [SearchController::class, 'index'])->name('search.index');
 Route::get('/ultimas-noticias', [IndexPageController::class, 'index'])->name('pages.index');
 
-Route::get('/{slug?}', function ($slug) {
+Route::get('/post/{slug?}', function ($slug) {
     if (str_contains($slug, '/')) {
         $segments = array_filter(explode('/', $slug));
         $slug = end($segments);
     }
     try {
-        $pageService = new PageService();
-        $page = $pageService->getPage($slug);
-
-        if (!isset($page->data->id)) {
-            throw new NotFoundHttpException();
-        }
-
-        return app(IndexPageController::class)->listByPage($slug);
-    } catch (NotFoundHttpException $e) {
         $postService = new PostService();
         $post = $postService->getPostBySlug($slug);
 
