@@ -12,8 +12,8 @@ class DetailPostController extends BaseController
         $permalink = '/' . ltrim($permalink, '/');
 
         $postService = new PostService();
-        $post = $postService->getPostBySlug($this->slugFromPermalink($permalink), [
-            '_embed' => 'featuredmedia,users,categories,tags,medias',
+        $post = $postService->getPostBySlug($slug, [
+            '_embed' => 'featuredmedia,users,pages,tags,medias',
         ]);
 
         if (! $post) {
