@@ -33,10 +33,9 @@ class FrontReaderServiceProvider extends ServiceProvider
         $this->loadRoutesFrom(__DIR__.'/Http/Routes/web.php');
 
         try {
-            $slugs = Cache::remember('front-reader.slugs', 600, function () {
+            $slugs = Cache::remember('front-reader.slugs', 60, function () {
                 $pageService = new PageService();
-
-                return $pageService->getSlugs();
+                return $pageService->getPermalinks();
             });
 
             Route::middleware('web')->group(function () use ($slugs) {

@@ -17,9 +17,9 @@ class PostService extends BaseService
         return $this->paginateResponse($response);
     }
 
-    public function getPostBySlug(string $slug, array $options = [])
+    public function getPostByPermalink(string $permalink, array $options = [])
     {
-        $url = '/posts/slug/'.$slug;
+        $url = '/posts/permalink/'.$permalink;
 
         $response = $this->tryRequest($url, $options);
 

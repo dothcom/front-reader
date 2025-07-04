@@ -15,7 +15,8 @@ class IndexPageController extends BaseController
         $template = $pageService->templateByType($page->data->page_type);
 
         if (! view()->exists($template)) {
-            abort(500);
+            report('Page template not found', ['slug' => $slug, 'template' => $template]);
+            abort();
         }
 
         $data = [

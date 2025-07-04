@@ -6,16 +6,23 @@ use Illuminate\Support\Facades\View;
 
 class PageService extends BaseService
 {
-    public function getPage(string $slug)
+    public function getPage(string $permalink)
     {
-        $endpoint = '/pages/slug/'.$slug;
+        $slug = basename(rtrim(parse_url($permalink, PHP_URL_PATH) ?: '', '/'));
 
-        return $this->tryRequest($endpoint);
+
+        $page = $this->tryRequest('/pages/slug/'.$slug);
+
+        if ($page->data->permalink != $permalink) {
+            return response()->json(['message' => 'Page not found'], 404);
+        }
+
+        return $page;
     }
 
-    public function getSlugs()
+    public function getPermalinks()
     {
-        $endpoint = '/pages/slugs/';
+        $endpoint = '/pages/permalink/';
 
         return $this->tryRequest($endpoint);
     }

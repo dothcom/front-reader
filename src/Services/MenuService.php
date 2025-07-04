@@ -44,6 +44,16 @@ class MenuService extends BaseService
             return [];
         }
 
+        foreach ($menu->data->pages as $page) {
+            if (isset($page->link_external) && ! isset($page->link)) {
+                $page->link = $page->link_external;
+            }
+
+            if (isset($page->permalink)) {
+                $page->link = $page->permalink;
+            }
+        }
+
         return $this->organizeMenu($menu->data->pages);
     }
 }
