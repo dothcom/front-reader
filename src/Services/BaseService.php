@@ -91,7 +91,7 @@ class BaseService
             throw new InvalidArgumentException('The response format is invalid.');
         }
 
-        $requiredMeta = ['total', 'per_page', 'current_page'];
+        $requiredMeta = ['per_page', 'current_page'];
         foreach ($requiredMeta as $key) {
             if (! property_exists($response->meta, $key)) {
                 throw new InvalidArgumentException("Meta data property is missing '{$key}'.");
@@ -102,7 +102,6 @@ class BaseService
 
         return new LengthAwarePaginator(
             $items,
-            $response->meta->total,
             $response->meta->per_page,
             $response->meta->current_page,
             [
