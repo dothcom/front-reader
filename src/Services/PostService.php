@@ -14,7 +14,7 @@ class PostService extends BaseService
             return $response;
         }
 
-        return $this->paginateResponse($response);
+        return $this->paginateSimple($response);
     }
 
     public function getPostByPermalink(string $permalink, array $options = [])

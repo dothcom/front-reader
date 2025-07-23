@@ -3,8 +3,7 @@
 namespace Dothcom\FrontReader\Services;
 
 use Exception;
-use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Support\Collection;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 use InvalidArgumentException;
@@ -82,32 +81,41 @@ class BaseService
         }
     }
 
-    protected function paginateResponse($response)
+    /**
+     * Paginates a simple response object.
+     *
+     * @param  object  $response  The response object containing data and meta information
+     * @return \Illuminate\Pagination\Paginator
+     * @throws InvalidArgumentException
+     */
+    protected function paginateSimple($response)
     {
-        if (! is_object($response) ||
-            ! property_exists($response, 'data') ||
-            ! property_exists($response, 'meta') ||
-            ! is_object($response->meta)) {
-            throw new InvalidArgumentException('The response format is invalid.');
+        if (!is_object($response) || !property_exists($response, 'data') || !property_exists($response, 'meta')) {
+            throw new InvalidArgumentException('Invalid response.');
         }
 
-        $requiredMeta = ['per_page', 'current_page'];
-        foreach ($requiredMeta as $key) {
-            if (! property_exists($response->meta, $key)) {
-                throw new InvalidArgumentException("Meta data property is missing '{$key}'.");
+        $items = collect($response->data);
+        $perPage = $response->meta->per_page;
+        $currentPage = $response->meta->current_page;
+
+        $customHasMore = $response->meta->has_more ?? (count($items) === $perPage);
+
+        return new class ($items, $perPage, $currentPage, [
+            'path' => request()->url(),
+            'query' => request()->query(),
+        ], $customHasMore) extends Paginator {
+            protected bool $customHasMorePages;
+
+            public function __construct($items, $perPage, $currentPage, $options, $customHasMorePages)
+            {
+                parent::__construct($items, $perPage, $currentPage, $options);
+                $this->customHasMorePages = $customHasMorePages;
             }
-        }
 
-        $items = $response->data instanceof Collection ? $response->data : collect($response->data);
-
-        return new LengthAwarePaginator(
-            $items,
-            $response->meta->per_page,
-            $response->meta->current_page,
-            [
-                'path' => request()->url(),
-                'query' => request()->query(),
-            ]
-        );
+            public function hasMorePages(): bool
+            {
+                return $this->customHasMorePages;
+            }
+        };
     }
 }
