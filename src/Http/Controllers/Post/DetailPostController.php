@@ -9,7 +9,7 @@ class DetailPostController extends BaseController
 {
     public function index(string $permalink)
     {
-        $permalink = '/' . ltrim($permalink, '/');
+        $permalink = trim($permalink, ' /');
 
         $postService = new PostService();
         $post = $postService->getPostByPermalink($permalink, [
