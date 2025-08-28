@@ -9,7 +9,6 @@ class DetailPostController extends BaseController
 {
     public function index(string $permalink)
     {
-        $permalink = trim($permalink, ' /');
 
         $postService = new PostService();
         $post = $postService->getPostByPermalink($permalink, [
@@ -20,10 +19,10 @@ class DetailPostController extends BaseController
             return abort(404);
         }
 
+        $permalink = '/'.$permalink;
         if ($post->data->permalink !== $permalink) {
             return abort(404);
         }
-
 
         $template = $postService->templateByType($post->data->post_type);
 

@@ -27,7 +27,7 @@ class PostService extends BaseService
             return false;
         }
 
-        return $this->tryRequest($url, $options);
+        return $response;
     }
 
     /**
