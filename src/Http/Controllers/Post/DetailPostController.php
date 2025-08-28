@@ -9,7 +9,6 @@ class DetailPostController extends BaseController
 {
     public function index(string $permalink)
     {
-
         $postService = new PostService();
         $post = $postService->getPostByPermalink($permalink, [
             '_embed' => 'featuredmedia,users,pages,tags,medias',
