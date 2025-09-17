@@ -17,9 +17,9 @@ Route::get('/', [IndexController::class, 'index'])->name('home');
 
 Route::get('/busca', [SearchController::class, 'index'])->name('search.index');
 
-// ROUTE FOR PAGES
+// ROUTE FOR POSTS DETAIL
 Route::get('{permalink}', [DetailPostController::class, 'index'])
-    ->where('permalink', '^(?:[a-z0-9-]+\/){0,5}noticia\/\d{4}\/\d{2}\/\d{2}\/[a-z0-9-]+\.html$')
+    ->where('permalink', '^(?:[a-z0-9-]+\/){0,5}\d{4}\/\d{2}\/\d{2}\/[a-z0-9-]+\.html$')
     ->name('posts.detail');
 
 // ROUTES FROM PAGES ARE REGISTERED DYNAMICALLY IN THE SERVICE PROVIDER - FrontReaderServiceProvider.php
