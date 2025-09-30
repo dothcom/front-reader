@@ -3,6 +3,8 @@
 use Dothcom\FrontReader\Http\Controllers\IndexController;
 use Dothcom\FrontReader\Http\Controllers\Post\DetailPostController;
 use Dothcom\FrontReader\Http\Controllers\SearchController;
+use Dothcom\FrontReader\Http\Controllers\Tag\IndexTagController;
+use Dothcom\FrontReader\Http\Controllers\Tag\DetailTagController;
 use Illuminate\Support\Facades\Route;
 
 // debug env vars inline
@@ -16,6 +18,11 @@ Route::get('/_debug', function () {
 Route::get('/', [IndexController::class, 'index'])->name('home');
 
 Route::get('/busca', [SearchController::class, 'index'])->name('search.index');
+
+Route::get('/tags', [IndexTagController::class, 'index'])->name('tag.index');
+Route::get('/tags/{slug}', [DetailTagController::class, 'index'])
+    ->where('slug', '[a-z0-9-]+')
+    ->name('tag.detail');
 
 // ROUTE FOR POSTS DETAIL
 Route::get('{permalink}', [DetailPostController::class, 'index'])
