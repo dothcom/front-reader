@@ -8,15 +8,19 @@ class PageService extends BaseService
 {
     public function getPage(string $permalink)
     {
-        $slug = basename(rtrim(parse_url($permalink, PHP_URL_PATH) ?: '', '/'));
-
-
-        $page = $this->tryRequest('/pages/slug/'.$slug);
-
+        
+        // if (!preg_match('/^[a-z0-9\-]+$/', $permalink)) {
+        //     return response()->json(['message' => 'Page not found'], 404);
+        // }
+        // dd($permalink);
+   
+        $page = $this->tryRequest('/pages/permalink/'.$permalink);
+        
         if ($page->data->permalink != $permalink) {
             return response()->json(['message' => 'Page not found'], 404);
         }
-
+        
+        
         return $page;
     }
 
