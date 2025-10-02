@@ -8,19 +8,19 @@ class PageService extends BaseService
 {
     public function getPage(string $permalink)
     {
-        
+
         // if (!preg_match('/^[a-z0-9\-]+$/', $permalink)) {
         //     return response()->json(['message' => 'Page not found'], 404);
         // }
         // dd($permalink);
-   
+
         $page = $this->tryRequest('/pages/permalink/'.$permalink);
-        
+
         if ($page->data->permalink != $permalink) {
             return response()->json(['message' => 'Page not found'], 404);
         }
-        
-        
+
+
         return $page;
     }
 
